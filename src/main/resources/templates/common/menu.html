@@ -9,6 +9,7 @@
 	*/--><li><a th:href="@{/item/list/1}">新着一覧</a></li><!--/*
 	*/--><li><a th:href="@{/basket/list}">買い物かご</a></li><!--/*
 	*/--><th:block th:if="${session.user != null}"><li><a th:href="@{/order/list}">注文一覧</a></li></th:block><!--/*
-	*/--></ul>
+	*/--><li><a th:href="@{/contact/customer/contact_customer_input}">お問合せ</a></li>
+	</ul>
 </body>
 </html>
