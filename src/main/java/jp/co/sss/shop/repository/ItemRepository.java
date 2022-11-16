@@ -25,11 +25,14 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	/** 商品情報を売れ筋順で検索*/
 	@Query(JPQLConstant.FIND_ORDER_BY_ORDER_COUNT)
 	public List<Item> findAllOrderById();
+	
+	/** カテゴリ別新着順検索 **/
+	@Query(JPQLConstant.FIND_BY_CATEGORY_ID_ORDER_BY_INSERT_DATE)
+	public List<Item>findByCategoryIdOrderByInsertDate(@Param("categoryId") int categoryId);
 
-	public List<Item> findByCategoryIdOrderByInsertDate(@Param("categoryId") int categoryId);
-
-	public List<Item> findByCategoryIdOrderById(@Param("categoryId") int categoryId);
-
-
+	/** カテゴリ別売れ筋順検索 */
+	@Query(JPQLConstant.FIND_BY_CATEGORY_ID_ORDER_BY_ORDER_COUNT)
+	public List<Item>findByCategoryIdOrderById(@Param("categoryId") int categoryId);
 }
-
+	
+	
