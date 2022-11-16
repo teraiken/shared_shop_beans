@@ -14,5 +14,5 @@ public class JPQLConstant {
 	//売れ筋商品検索
 	public static final String FIND_ORDER_BY_ORDER_COUNT
 		= "SELECT new Item(i.id, i.name, i.price, i.description, i.image, c.name) FROM Item i INNER JOIN i.category c INNER JOIN i.orderItemList oi WHERE i.deleteFlag = 0 GROUP BY i.id, i.name, i.price, i.description, i.image, c.name ORDER BY COUNT(i.id) DESC, i.id ASC";
-	
+}
 	
