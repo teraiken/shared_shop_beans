@@ -8,16 +8,16 @@
 <body class="user item_list" th:object="${loginForm}">
 
 	<h2 class="title">商品一覧</h2>
-	<div class="sorted_by">
-		<span th:if="${sortType == 1}">
-			<a href="/shared_shop/item/list/1">新着順</a>
-			<span>売れ筋順</span>
-		</span> 
-		<span th:if="${sortType == null}">
-			<span>新着順</span>
-			<a href="/shared_shop/item/list/2">売れ筋順 </a>
-		</span>
-	</div>
+	<th:block th:if="${!#lists.isEmpty(items)}">
+		<div class="sorted_by">
+			<span th:if="${sortType==1}" th:text="新着順"></span>
+			<!-- 売れ筋順表示の場合新着順表示への切り替えリンクを表示 -->
+			<a th:unless="${sortType==1}" th:href="@{/item/list/1}" th:text="新着順"> </a> 
+			<span th:if="${sortType==2}" th:text="売れ筋順"></span>
+			<!-- 新着順表示の場合売れ筋順表示への切り替えリンクを表示-->
+			<a th:unless="${sortType==2}" th:href="@{/item/list/2}" th:text="売れ筋順"> </a>	
+		</div>
+	</th:block>
 	<div th:if="${#lists.isEmpty(items)}">
 		<p th:text="#{itemListAdmin.none}"></p>
 	</div>
