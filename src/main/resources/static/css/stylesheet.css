@@ -390,6 +390,19 @@ p {
 	clear: both;
 }
 
+/* ---- エラーメッセージ表示 ---- */
+.error_list {
+	line-height: 1.5em;
+	font-size: 0.9rem;
+	color: #c00;
+}
+
+.error_list li{
+	display:list-item;
+	list-style-type: disc;
+	list-style-position:inside;
+}
+
 /* スキルアップテクニック9
  * :first-of-typeは擬似クラスの一種で、
  * 設定した同要素複数の中から最初に現れる要素に対し設定を行います。
