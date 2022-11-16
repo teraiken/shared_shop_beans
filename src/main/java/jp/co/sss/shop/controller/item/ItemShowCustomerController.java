@@ -1,5 +1,7 @@
 package jp.co.sss.shop.controller.item;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class ItemShowCustomerController {
 
 	/**
 	 * 新着順、売れ筋順表示
-	 *
+	 * 
 	 * @param sortType
 	 * @param model
 	 * @param categoryId
@@ -63,11 +65,9 @@ public class ItemShowCustomerController {
 		if (sortType == 1) {
 			// 商品情報を全件検索(新着順)
 			itemList = itemRepository.findByDeleteFlagOrderByInsertDateDescIdAsc(Constant.NOT_DELETED);
-			model.addAttribute("sortType", 1);
 		} else {
 			// 商品情報を全件検索(売れ筋順)
 			itemList = itemRepository.findAllOrderById();
-			model.addAttribute("sortType", 2);
 		}
 
 		// エンティティ内の検索結果をJavaBeansにコピー
@@ -75,14 +75,46 @@ public class ItemShowCustomerController {
 
 		// 商品情報をViewへ渡す
 		model.addAttribute("items", itemBeanList);
-
+		// sortTypeをViewへ渡す
+		model.addAttribute("sortType", sortType);
+		
 		return "item/list/item_list";
 	}
 
+	/**
+	 * カテゴリ別検索
+	 * 
+	 * @param sortType
+	 * @param categoryId
+	 * @param model
+	 * @return 商品一覧画面
+	 */
+	@RequestMapping("/item/list/category/{sortType}")
+	public String sortByCategory(@PathVariable int sortType, int categoryId, Model model) {
+		List<Item> itemList = null;
+
+		if (sortType == 1) {
+			// 商品情報をカテゴリ別検索(新着順)
+			itemList = itemRepository.findByCategoryIdOrderByInsertDate(categoryId);
+		} else {
+			// 商品情報をカテゴリ別検索(売れ筋順)
+			itemList = itemRepository.findByCategoryIdOrderById(categoryId);
+		}
+		// エンティティ内の検索結果をJavaBeansにコピー
+		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
+		// 商品情報をViewへ渡す
+		model.addAttribute("items", itemBeanList);
+		// sortTypeをViewへ渡す
+		model.addAttribute("sortType", sortType);
+		
+		System.out.println(itemBeanList);
+		return "item/list/item_list";
+
+	}
 
 	/**
 	 * 商品詳細画面
-	 *
+	 * 
 	 * @param id
 	 * @param model
 	 * @return 商品詳細画面
@@ -91,30 +123,26 @@ public class ItemShowCustomerController {
 	public String itemDetail(@PathVariable int id, Model model) {
 		// 商品IDで検索しJavaBeansにコピー
 		ItemBean item = BeanCopy.copyEntityToBean(itemRepository.getById(id));
+		
+		item.getId();
+		// 商品情報を全件検索(売れ筋順)
+		List<Item> itemsList = itemRepository.findByCategoryIdOrderById(item.getCategoryId());
+		List<Item> itemList = new ArrayList<Item>();
+		for(Item value: itemsList) {
+			if(value.getId() != item.getId()) {
+				itemList.add(value);
+			}
+		}
+		// エンティティ内の検索結果をJavaBeansにコピー
+		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
+		
+		
 		// 商品情報をViewへ渡す
 		model.addAttribute("item", item);
+		model.addAttribute("items", itemBeanList);
+		
+		
 		return "item/detail/item_detail";
 	}
-
-	@RequestMapping(path = "/item/list/category/{sortType}")
-	public String itemListCategory1 (@PathVariable Integer sortType, Integer categoryId, Model model){
-
-		List<Item> itemList = null;
-
-		if(sortType == 1) {
-			itemList = itemRepository.findByCategoryIdOrderByInsertDate(categoryId);
-
-		}else {
-			itemList = itemRepository.findByCategoryIdOrderById(categoryId);
-		}
-
-		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
-
-		model.addAttribute("items", itemBeanList);
-		model.addAttribute("sortType",sortType);
-
-		return "item/list/item_list";
-	}
-
 
 }
