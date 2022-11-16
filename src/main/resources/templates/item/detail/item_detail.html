@@ -44,8 +44,10 @@
 			</form>
 		</div>
 	</div>
-	<h4 class="sameCategoryItemTitle">類似商品</h4>
 	<th:block th:if="${!#lists.isEmpty(items)}">
+	<h4 class="sameCategoryItemTitle">類似商品</h4>
+	
+		<!-- <p th:text="#{itemListAdmin.none}"></p> -->
 		<div th:each="items, st: ${items}">
 		<th:block th:if="${st.count <= 3}">
 			<div class="sameCategoryItem">

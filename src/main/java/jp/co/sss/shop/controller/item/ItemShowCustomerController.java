@@ -59,7 +59,7 @@ public class ItemShowCustomerController {
 	 */
 	@RequestMapping(path = "/item/list/{sortType}")
 	public String itemList(@PathVariable Integer sortType, Model model, Integer categoryId) {
-
+		//変数定義、初期化
 		List<Item> itemList = null;
 
 		if (sortType == 1) {
@@ -91,6 +91,7 @@ public class ItemShowCustomerController {
 	 */
 	@RequestMapping("/item/list/category/{sortType}")
 	public String sortByCategory(@PathVariable int sortType, int categoryId, Model model) {
+		//変数定義、初期化
 		List<Item> itemList = null;
 
 		if (sortType == 1) {
@@ -107,7 +108,6 @@ public class ItemShowCustomerController {
 		// sortTypeをViewへ渡す
 		model.addAttribute("sortType", sortType);
 		
-		System.out.println(itemBeanList);
 		return "item/list/item_list";
 
 	}
@@ -123,10 +123,9 @@ public class ItemShowCustomerController {
 	public String itemDetail(@PathVariable int id, Model model) {
 		// 商品IDで検索しJavaBeansにコピー
 		ItemBean item = BeanCopy.copyEntityToBean(itemRepository.getById(id));
-		
-		item.getId();
 		// 商品情報を全件検索(売れ筋順)
 		List<Item> itemsList = itemRepository.findByCategoryIdOrderById(item.getCategoryId());
+		//全件検索の結果から商品ID検索の結果と同じものを取り除く
 		List<Item> itemList = new ArrayList<Item>();
 		for(Item value: itemsList) {
 			if(value.getId() != item.getId()) {
