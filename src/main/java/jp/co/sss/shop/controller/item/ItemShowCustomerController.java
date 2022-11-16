@@ -49,7 +49,7 @@ public class ItemShowCustomerController {
 
 	/**
 	 * 新着順、売れ筋順表示
-	 * 
+	 *
 	 * @param sortType
 	 * @param model
 	 * @param categoryId
@@ -75,15 +75,14 @@ public class ItemShowCustomerController {
 
 		// 商品情報をViewへ渡す
 		model.addAttribute("items", itemBeanList);
-		
+
 		return "item/list/item_list";
 	}
 
-	
 
 	/**
 	 * 商品詳細画面
-	 * 
+	 *
 	 * @param id
 	 * @param model
 	 * @return 商品詳細画面
@@ -96,5 +95,26 @@ public class ItemShowCustomerController {
 		model.addAttribute("item", item);
 		return "item/detail/item_detail";
 	}
+
+	@RequestMapping(path = "/item/list/category/{sortType}")
+	public String itemListCategory1 (@PathVariable Integer sortType, Integer categoryId, Model model){
+
+		List<Item> itemList = null;
+
+		if(sortType == 1) {
+			itemList = itemRepository.findByCategoryIdOrderByInsertDate(categoryId);
+
+		}else {
+			itemList = itemRepository.findByCategoryIdOrderById(categoryId);
+		}
+
+		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
+
+		model.addAttribute("items", itemBeanList);
+		model.addAttribute("sortType",sortType);
+
+		return "item/list/item_list";
+	}
+
 
 }

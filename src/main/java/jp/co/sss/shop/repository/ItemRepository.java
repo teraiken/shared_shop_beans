@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import jp.co.sss.shop.entity.Item;
@@ -24,6 +25,11 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	/** 商品情報を売れ筋順で検索*/
 	@Query(JPQLConstant.FIND_ORDER_BY_ORDER_COUNT)
 	public List<Item> findAllOrderById();
+
+	public List<Item> findByCategoryIdOrderByInsertDate(@Param("categoryId") int categoryId);
+
+	public List<Item> findByCategoryIdOrderById(@Param("categoryId") int categoryId);
+
+
 }
-	
-	
+
