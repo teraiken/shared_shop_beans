@@ -35,8 +35,8 @@ public class ItemShowCustomerController {
 	 */
 	@RequestMapping(path = "/")
 	public String index(Model model) {
-		// 商品情報を全件検索(新着順)
-		List<Item> itemList = itemRepository.findByDeleteFlagOrderByInsertDateDescIdAsc(Constant.NOT_DELETED);
+		// 商品情報を全件検索(売れ筋順)
+		List<Item> itemList = itemRepository.findAllOrderById();
 
 		// エンティティ内の検索結果をJavaBeansにコピー
 		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
@@ -48,51 +48,51 @@ public class ItemShowCustomerController {
 	}
 
 	/**
-	 * 新着順表示
+	 * 新着順、売れ筋順表示
 	 * 
+	 * @param sortType
 	 * @param model
-	 * @return
+	 * @param categoryId
+	 * @return 商品一覧表示画面
 	 */
-	@RequestMapping(path = "/item/list/1")
-	public String newDateDesc(Model model) {
-		List<Item> itemList = itemRepository.findByDeleteFlagOrderByInsertDateDescIdAsc(Constant.NOT_DELETED);
+	@RequestMapping(path = "/item/list/{sortType}")
+	public String itemList(@PathVariable Integer sortType, Model model, Integer categoryId) {
+
+		List<Item> itemList = null;
+
+		if (sortType == 1) {
+			// 商品情報を全件検索(新着順)
+			itemList = itemRepository.findByDeleteFlagOrderByInsertDateDescIdAsc(Constant.NOT_DELETED);
+			model.addAttribute("sortType", 1);
+		} else {
+			// 商品情報を全件検索(売れ筋順)
+			itemList = itemRepository.findAllOrderById();
+			model.addAttribute("sortType", 2);
+		}
 
 		// エンティティ内の検索結果をJavaBeansにコピー
 		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
 
 		// 商品情報をViewへ渡す
 		model.addAttribute("items", itemBeanList);
+		
 		return "item/list/item_list";
 	}
 
-	@RequestMapping(path = "/item/list/2")
-	public String hotSalling(Model model) {
-
-		List<Item> itemList = itemRepository.findByHotSelling();
-
-		// エンティティ内の検索結果をJavaBeansにコピー
-		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
-
-		// 商品情報をViewへ渡す
-		// model.addAttribute("items", itemBeanList);
-		model.addAttribute("items", itemBeanList);
-		model.addAttribute("sortType", 1);
-		System.out.println("aaa");
-		return "item/list/item_list";
-
-	}
+	
 
 	/**
 	 * 商品詳細画面
 	 * 
 	 * @param id
 	 * @param model
-	 * @return
+	 * @return 商品詳細画面
 	 */
 	@RequestMapping(path = "/item/detail/{id}")
 	public String itemDetail(@PathVariable int id, Model model) {
+		// 商品IDで検索しJavaBeansにコピー
 		ItemBean item = BeanCopy.copyEntityToBean(itemRepository.getById(id));
-
+		// 商品情報をViewへ渡す
 		model.addAttribute("item", item);
 		return "item/detail/item_detail";
 	}
