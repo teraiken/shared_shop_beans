@@ -17,7 +17,7 @@
 					<li>
 						<label>
 							<span class="input_title">郵便番号</span>
-							<input type="text" th:field="*{postalCode}" />
+							<input type="text" name="postalCode" onKeyUp="AjaxZip3.zip2addr(this,'','address','address');" th:field="*{postalCode}" />
 						</label>
 					</li>
 					<li>
