@@ -17,7 +17,7 @@ import javax.persistence.Table;
 /**
  * 商品情報のエンティティクラス
  *
- * @author SystemShared
+ * @author author_name
  */
 @Entity
 @Table(name = "items")
@@ -86,6 +86,50 @@ public class Item {
 	@OneToMany(mappedBy = "item")
 	private List<OrderItem> orderItemList;
 
+	/**
+	 * コンストラクタ
+	 */
+	public Item() {
+	}
+
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param id  商品ID
+	 * @param name  商品名
+	 * @param description  商品説明
+	 * @param image  画像ファイル名
+	 * @param category_name カテゴリ名
+	 */
+	public Item(Integer id, String name, String description, String image, String category_name) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.image = image;
+		this.category = new Category();
+		this.category.setName(category_name);
+	}
+
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param id  商品ID
+	 * @param name  商品名
+	 * @param price  価格
+	 * @param description  商品説明
+	 * @param image  画像ファイル名
+	 * @param category_name カテゴリ名
+	 */
+	public Item(Integer id, String name, Integer price, String description, String image, String category_name) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.image = image;
+		this.category = new Category();
+		this.category.setName(category_name);
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -165,5 +209,5 @@ public class Item {
 	public void setOrderItemsList(List<OrderItem> orderItemList) {
 		this.orderItemList = orderItemList;
 	}
-
+	
 }
