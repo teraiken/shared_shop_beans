@@ -43,7 +43,7 @@
 				<a th:href="@{/category/list}" class="display_list">カテゴリ一覧表示</a>
 			</li>
 			<li th:if="${session.user.authority == 1}">
-				<a th:href="@{/contact/admin/list}" class="display_list">問い合わせ一覧表示</a>
+				<a th:href="@{/contact/admin/contact_admin_list}" class="display_list">問い合わせ一覧表示</a>
 			</li>
 		</ul>
 		<br/>
@@ -51,7 +51,7 @@
 		<h2 class="title">カテゴリ別検索</h2>
 		<div class="form">
 			<!-- 商品一覧画面以外で表示 -->
-			<form th:action="@{/contact/admin/list/category}">
+			<form th:action="@{/contact/admin/category}">
 				<select name="contactCategory">
 					<option value=0>商品について</option>
 					<option value=1>サイトについて</option>
