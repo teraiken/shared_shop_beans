@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{common/layout_4block :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>問合せ一覧 | シェアードショップ</title>
+<meta charset="UTF-8" />
+</head>
+<body class="admin contact_list_admin" th:object="${loginForm}">
+
+		<h2 class="title">問合せ一覧</h2>
+
+		<div th:if="${#lists.isEmpty(contacts)}">
+			<p th:text="#{contactAdminList.none}"></p>
+		</div>
+		<table class="list_table item_list"  th:if="!${#lists.isEmpty(contacts)}">
+			<tr>
+				<th>名前</th>
+				<th>問い合わせ日時</th>
+				<th>カテゴリ</th>
+				<th>状態</th>
+			</tr>
+			<!--/* 問い合わせ情報 */-->
+			<tr th:each="contact: ${contacts}">
+			<td><a th:href="@{/contact/admin/contact_admin_detail/{id}(id=${contact.id})}"
+					th:text="${contact.name}"></a></td>
+				<td th:text="${#dates.format(contact.insertDate,'yyyy-MM-dd')}"></td>
+				<td th:switch="${contact.contactCategory}">
+					<span th:case="0">商品について</span>
+					<span th:case="1">サイトについて</span>
+					<span th:case="2">その他</span>
+				</td>
+				<td th:switch="${contact.status}">
+					<span th:case="0">未対応</span>
+					<span th:case="1">対応中</span>
+					<span th:case="2">対応済み</span>
+				</td>
+			</tr>
+		</table>
+</body>
+</html>
