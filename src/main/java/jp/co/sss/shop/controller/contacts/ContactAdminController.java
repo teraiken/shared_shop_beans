@@ -30,7 +30,7 @@ public class ContactAdminController {
 		model.addAttribute("contacts", contactList);
 		//カテゴリ別検索を表示させるための値をViewに渡す
 		model.addAttribute("page",1);
-		return "contacts/contact_admin_list";
+		return "contact/admin/contact_admin_list";
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class ContactAdminController {
 		model.addAttribute("contacts", contactList);
 		//カテゴリ別検索を表示させるための値をViewに渡す
 		model.addAttribute("page",1);
-		return "contacts/contact_admin_list";
+		return "contact/admin/contact_admin_list";
 	}
 
 }
