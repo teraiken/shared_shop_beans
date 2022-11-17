@@ -22,7 +22,7 @@ public class ContactAdminController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/contact/admin/list")
+	@RequestMapping("/contact/admin/contact_admin_list")
 	public String contactAdminList(Model model) {
 		//データ登録順で検索
 		List<Contacts> contactList = contactRepository.findAllByOrderByInsertDateDesc();
@@ -40,7 +40,7 @@ public class ContactAdminController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("/contact/admin/list/category")
+	@RequestMapping("/contact/admin/category")
 	public String contactAdminListfindByCategory(int contactCategory, Model model) {
 		//カテゴリ別にデータ登録順で検索
 		List<Contacts> contactList = contactRepository.findByContactCategoryOrderByInsertDateDesc(contactCategory);
