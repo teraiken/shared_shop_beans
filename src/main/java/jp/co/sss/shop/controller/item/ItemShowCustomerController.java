@@ -19,7 +19,7 @@ import jp.co.sss.shop.util.Constant;
 /**
  * 商品管理 一覧表示機能(一般会員用)のコントローラクラス
  *
- * @author SystemShared
+ * @author 
  */
 @Controller
 public class ItemShowCustomerController {
@@ -52,10 +52,10 @@ public class ItemShowCustomerController {
 	/**
 	 * 新着順、売れ筋順表示
 	 * 
-	 * @param sortType
+	 * @param sortType ソートタイプ番号
 	 * @param model
-	 * @param categoryId
-	 * @return 商品一覧表示画面
+	 * @param categoryId カテゴリID
+	 * @return "item/list/item_list"商品一覧表示画面
 	 */
 	@RequestMapping(path = "/item/list/{sortType}")
 	public String itemList(@PathVariable Integer sortType, Model model, Integer categoryId) {
@@ -84,10 +84,10 @@ public class ItemShowCustomerController {
 	/**
 	 * カテゴリ別検索
 	 * 
-	 * @param sortType
-	 * @param categoryId
+	 * @param sortType	ソートタイプ番号
+	 * @param categoryId カテゴリID
 	 * @param model
-	 * @return 商品一覧画面
+	 * @return "item/list/item_list"商品一覧画面
 	 */
 	@RequestMapping("/item/list/category/{sortType}")
 	public String sortByCategory(@PathVariable int sortType, int categoryId, Model model) {
@@ -115,9 +115,9 @@ public class ItemShowCustomerController {
 	/**
 	 * 商品詳細画面
 	 * 
-	 * @param id
+	 * @param id 選択された商品ID
 	 * @param model
-	 * @return 商品詳細画面
+	 * @return "item/detail/item_detail"商品詳細画面
 	 */
 	@RequestMapping(path = "/item/detail/{id}")
 	public String itemDetail(@PathVariable int id, Model model) {
