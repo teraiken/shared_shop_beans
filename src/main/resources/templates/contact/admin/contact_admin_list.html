@@ -7,7 +7,7 @@
 </head>
 <body class="admin contact_list_admin" th:object="${loginForm}">
 
-		<h2 class="title">問合せ一覧</h2>
+		<h2 class="title">問い合わせ一覧</h2>
 
 		<div th:if="${#lists.isEmpty(contacts)}">
 			<p th:text="#{contactAdminList.none}"></p>
@@ -17,7 +17,7 @@
 				<th>名前</th>
 				<th>問い合わせ日時</th>
 				<th>カテゴリ</th>
-				<th>状態</th>
+				<th>ステータス</th>
 			</tr>
 			<!--/* 問い合わせ情報 */-->
 			<tr th:each="contact: ${contacts}">
