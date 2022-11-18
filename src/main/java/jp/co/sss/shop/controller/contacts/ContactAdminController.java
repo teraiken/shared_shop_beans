@@ -20,7 +20,7 @@ public class ContactAdminController {
 	 * 問い合わせ一覧表示
 	 * 
 	 * @param model
-	 * @return
+	 * @return "contact/admin/contact_admin_list"一覧表示画面
 	 */
 	@RequestMapping("/contact/admin/contact_admin_list")
 	public String contactAdminList(Model model) {
@@ -36,12 +36,12 @@ public class ContactAdminController {
 	/**
 	 * カテゴリ別検索
 	 * 
-	 * @param contactCategory
+	 * @param contactCategory カテゴリID
 	 * @param model
-	 * @return
+	 * @return "contact/admin/contact_admin_list"一覧表示画面
 	 */
 	@RequestMapping("/contact/admin/category")
-	public String contactAdminListfindByCategory(int contactCategory, Model model) {
+	public String contactAdminListFindByCategory(int contactCategory, Model model) {
 		//カテゴリ別にデータ登録順で検索
 		List<Contacts> contactList = contactRepository.findByContactCategoryOrderByInsertDateDesc(contactCategory);
 		//リストをViewに渡す
@@ -54,19 +54,19 @@ public class ContactAdminController {
 	/**
 	 * ステータス別検索
 	 * 
-	 * @param contact
+	 * @param status ステータスID
 	 * @param model
-	 * @return
+	 * @return "contact/admin/contact_admin_list"一覧表示画面
 	 */
 	@RequestMapping("/contact/admin/status")
-	public String contactAdminListfindByStatus(int status, Model model) {
+	public String contactAdminListFindByStatus(int status, Model model) {
 		//ステータス別にデータ登録順で検索
 		List<Contacts> contactList = contactRepository.findByStatusOrderByInsertDateDesc(status);
 		//リストをViewに渡す
 		model.addAttribute("contacts", contactList);
-		//カテゴリ別検索を表示させるための値をViewに渡す
-		model.addAttribute("page",1);
+		//ステータス別検索を表示させるための値をViewに渡す
+		model.addAttribute("page", 1);
+		
 		return "contact/admin/contact_admin_list";
 	}
-
 }
