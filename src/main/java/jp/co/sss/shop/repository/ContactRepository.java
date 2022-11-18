@@ -13,4 +13,6 @@ public interface ContactRepository extends JpaRepository<Contacts, Integer> {
 
 	public List<Contacts> findByContactCategoryOrderByInsertDateDesc(int contactCategory);
 
+	public List<Contacts> findByStatusOrderByInsertDateDesc(int status);
+	//
 }

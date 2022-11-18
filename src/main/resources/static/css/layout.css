@@ -183,6 +183,11 @@ aside.admin_menu {
 	float: left;
 	width: 20%;
 }
+
+.status{
+	margin-top:20px;
+}
+
 .search .title,
 .admin_menu .title {
 	border-radius: 6px 6px 0 0;

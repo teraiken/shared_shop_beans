@@ -50,5 +50,23 @@ public class ContactAdminController {
 		model.addAttribute("page",1);
 		return "contact/admin/contact_admin_list";
 	}
+	
+	/**
+	 * ステータス別検索
+	 * 
+	 * @param contact
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/contact/admin/status")
+	public String contactAdminListfindByStatus(int status, Model model) {
+		//ステータス別にデータ登録順で検索
+		List<Contacts> contactList = contactRepository.findByStatusOrderByInsertDateDesc(status);
+		//リストをViewに渡す
+		model.addAttribute("contacts", contactList);
+		//カテゴリ別検索を表示させるための値をViewに渡す
+		model.addAttribute("page",1);
+		return "contact/admin/contact_admin_list";
+	}
 
 }

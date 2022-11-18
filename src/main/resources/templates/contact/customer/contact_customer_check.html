@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>お問い合わせ確認画面 | シェアードショップ</title>
+<meta charset="UTF-8" />
+</head>
+<body class="contact_customer_check">
+
+
+	<div class="search_area">
+		<h2 class="title">お問い合わせ確認</h2>
+		<p class="check_message">以下の内容で送信します。</p>
+
+
+		<ul class="input_list">
+			<li><span class="input_title">氏名</span> <span
+				class="input_value" th:text="${contactForm.name}"></span></li>
+			<li><span class="input_title">メールアドレス</span> <span
+				class="input_value" th:text="${contactForm.email}"></span></li>
+			<li th:switch="${contactForm.contactCategory}"><span
+				th:case="0">このサイトについて</span> <span th:case="1">商品について</span> <span
+				th:case="2">その他</span></li>
+			<li><span class="input_title">お問い合わせ内容</span> <span
+				class="input_value" th:text="${contactForm.contactForm}"></span></li>
+
+		</ul>
+
+		<form method="post" th:action="@{/contact/customer/contact_customer_complete}"th:object="${contactForm}" class="user_info_form">
+			<input type="hidden" name="name" th:value="${contactForm.name}" /> 
+			<input type="hidden" name="email" th:value="${contactForm.email}" /> 
+			<input type="hidden" name="contactCategory" th:value="${contactForm.contactCategory}" />
+			<input type="hidden" name="contactForm" th:value="${contactForm.contactForm}" />
+			<input type="submit" value="送信" class="send_button" />
+		</form>
+		
+		
+		<form method="post" th:action="@{/contact/customer/contact_customer_input}" th:object="${contactForm}">
+			<input type="hidden" th:field="*{name}" /> 
+			<input type="hidden" th:field="*{email}" /> 
+			<input type="hidden" th:field="*{contactCategory}" />
+			<input type="hidden" th:field="*{contactForm}" />
+			<input type="submit" value="戻る" class="back_button" />
+		</form>
+
+	</div>
+
+
+
+
+</body>
+</html>

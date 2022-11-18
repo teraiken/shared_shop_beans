@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>お問い合わせ | シェアードショップ</title>
+<meta charset="UTF-8" />
+</head>
+<body class="contact_customer_input">
+
+
+	<div class="search_area">
+		<h2 class="title">お問い合わせ</h2>
+		<div class="user_info_form_area">
+		<div class="form">
+		
+			<form action="#" method="post"
+				th:action="@{/contact/customer/contact_customer_check}"
+				th:object="${contactForm}">
+				<ul th:if="${#fields.hasErrors('*')}"  th:class="input_list" >
+  					<li th:each="err : ${#fields.errors('*')}" th:text="${err}" th:class="error_list" ></li>
+				</ul>
+				
+				<ul class="input_list">
+				<li>
+							<label>
+								<span class="input_title">氏名</span>
+								<input type="text" th:field="*{name}" />
+							</label>
+					</li>
+					<li>
+							<label>
+								<span class="input_title">メールアドレス</span>
+								<input type="text" th:field="*{email}" />
+							</label>
+					</li>
+					<li>
+						<label>
+							<span class="input_title">お問い合わせカテゴリ</span>
+								<select name="contactCategory">
+								<option value="" th:selected = "*{contactCategory == null}" >選択してください</option>
+								<option value="0" th:selected = "*{contactCategory == 0}">このサイトについて</option>
+								<option value="1" th:selected = "*{contactCategory == 1}">商品について</option>
+								<option value="2" th:selected = "*{contactCategory == 2}">その他</option>
+							</select>
+							</label>
+					</li>
+					
+					<li>
+							<label>
+								<span class="input_title">お問い合わせ内容</span>
+								<textarea 
+							th:field="*{contactForm}"></textarea>
+							</label>
+						</li>
+						
+					
+					</ul>
+					
+					<!--  <dt id="input_title">プライバシーポリシーに同意する</dt>
+					<dd>
+						<input type="checkbox" name="agree" value="agreement">
+					</dd>-->
+
+				<input type="submit" value="確認" id="send_button">
+			</form>
+				<form th:action="@{/}">
+				<input type="submit" value="戻る" class="back_button"/>
+			</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>
