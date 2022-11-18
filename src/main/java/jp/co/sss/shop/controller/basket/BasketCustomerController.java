@@ -19,10 +19,10 @@ import jp.co.sss.shop.repository.ItemRepository;
 public class BasketCustomerController {
 	
 	@Autowired
-	ItemRepository itemRepository;
+	HttpSession session;
 	
 	@Autowired
-	HttpSession session;
+	ItemRepository itemRepository;
 	
 	@RequestMapping(path = "/basket/add", method = RequestMethod.POST)
 	public String addItem(Integer id, Model model) {
@@ -30,53 +30,41 @@ public class BasketCustomerController {
 		List<BasketBean> basketBeanList = (ArrayList<BasketBean>)session.getAttribute("basketBeans");
 		if (basketBeanList == null) {
 			basketBeanList = new ArrayList<BasketBean>();
-			Item item = itemRepository.getById(id);
-			if (item.getStock() > 0) {
-				BasketBean newBasketBean = new BasketBean(item.getId(), item.getName(), item.getStock());
-				basketBeanList.add(newBasketBean);
-				session.setAttribute("basketBeans", basketBeanList);
-			}
-		} else {
-			Item item = itemRepository.getById(id);
-			boolean flag = true;
-			for (BasketBean basketBean : basketBeanList) {
-				if (basketBean.getId() == item.getId()) {
-					flag = false;
-					if (item.getStock() <= basketBean.getOrderNum()) {
-						model.addAttribute("errorItem", '※' + item.getName());
-					} else {
-						basketBean.setOrderNum(basketBean.getOrderNum() + 1);
-						session.setAttribute("basketBeans", basketBeanList);
-					}
-					break;
+		}
+		Item item = itemRepository.getById(id);
+		boolean flag = true;
+		for (BasketBean basketBean : basketBeanList) {
+			if (item.getId() == basketBean.getId()) {
+				flag = false;
+				if (item.getStock() > basketBean.getOrderNum()) {
+					basketBean.setOrderNum(basketBean.getOrderNum() + 1);
+				} else {
+					model.addAttribute("errorItem", '※' + item.getName());
 				}
-			}
-			if (flag && item.getStock() > 0) {
-				BasketBean newBasketBean = new BasketBean(item.getId(), item.getName(), item.getStock());
-				basketBeanList.add(newBasketBean);
-				session.setAttribute("basketBeans", basketBeanList);
+				break;
 			}
 		}
-		return "basket/shopping_basket";
-	}
-	
-	@RequestMapping(path = "/basket/list", method = RequestMethod.POST)
-	public String basketList() {
+		if (flag && item.getStock() >= 1) {
+			BasketBean basketBean = new BasketBean(item.getId(), item.getName(), item.getStock());
+			basketBeanList.add(basketBean);
+		}
+		session.setAttribute("basketBeans", basketBeanList);
 		return "basket/shopping_basket";
 	}
 	
 	@RequestMapping(path = "/basket/delete", method = RequestMethod.POST)
 	public String deleteItem(Integer id) {
+		
 		List<BasketBean> basketBeanList = (ArrayList<BasketBean>)session.getAttribute("basketBeans");
 		List<BasketBean> toRemove = new ArrayList<BasketBean>();
 		Item item = itemRepository.getById(id);
 		for (BasketBean basketBean : basketBeanList) {
-			if (basketBean.getId() == item.getId()) {
+			if (item.getId() == basketBean.getId()) {
 				basketBean.setOrderNum(basketBean.getOrderNum() - 1);
-				session.setAttribute("basketBeans", basketBeanList);
-			}
-			if (basketBean.getOrderNum() == 0) {
-				toRemove.add(basketBean);
+				if (basketBean.getOrderNum() == 0) {
+					toRemove.add(basketBean);
+				}
+				break;
 			}
 		}
 		basketBeanList.removeAll(toRemove);
@@ -86,12 +74,14 @@ public class BasketCustomerController {
 	
 	@RequestMapping(path = "/basket/allDelete", method = RequestMethod.POST)
 	public String deleteAll() {
+		
 		session.removeAttribute("basketBeans");
 		return "basket/shopping_basket";
 	}
 	
 	@RequestMapping(path = "/basket/list")
 	public String basketListGet() {
+		
 		return "basket/shopping_basket";
 	}
 }
