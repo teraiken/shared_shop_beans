@@ -38,6 +38,8 @@ public class ContactCustomerController {
 	/**
 	 * POSTメソッドを利用してお問い合わせ内容入力画面に戻る処理
 	 * 
+	 * @param model
+	 * @param contactForm お問い合わせ入力フォーム 
 	 * @return "user/regist/user_regist_input" 会員情報 登録入力画面へ
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_input", method = RequestMethod.POST)
@@ -50,12 +52,17 @@ public class ContactCustomerController {
 	/**
 	 * お問い合わせ内容登録確認処理
 	 * 
-	 * @param form   お問い合わせ内容入力フォーム 
+	 * @param model
+	 * @param contactForm お問い合わせ内容入力フォーム
+	 * @param result 入力チェック結果 
+	 * @return 入力値エラーあり: contact/customer/contact_customer_inpu 会員情報登録画面へ
+	 *         入力値エラーなし:contact/customer/contact_customer_checkk 会員情報 登録確認画面へ
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_check", method = RequestMethod.POST)
 	public String contactCheck(@Valid @ModelAttribute ContactForm contactForm, BindingResult result,Model model) {
 		model.addAttribute("page",2);
 		
+		// 入力値にエラーがあった場合、お問い合わせ内容 入力画面表示処理に戻る
 		if (result.hasErrors()) {
 			return "contact/customer/contact_customer_input";
 		}
@@ -67,7 +74,8 @@ public class ContactCustomerController {
 	/**
 	 * お問い合わせ内容登録確認処理
 	 * 
-	 * @param form   お問い合わせ内容入力フォーム 
+	 * @param model
+	 * @param contactForm お問い合わせ内容入力フォーム 
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_complete", method = RequestMethod.POST)
 	public String contactComplete(@ModelAttribute ContactForm contactForm,Model model) {
@@ -89,7 +97,6 @@ public class ContactCustomerController {
 	/**
 	 * お問い合わせ内容登録完了画面表示
 	 *
-	 * @param form お問い合わせ内容入力フォーム
 	 * @return "/contact/customer/contact_customer_complete" お問い合わせ内容登録完了画面へ
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_complete", method = RequestMethod.GET)

@@ -6,26 +6,36 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * 会員情報入力フォーム
+ * お問い合わせ内容入力フォーム
  *
  * @author 及川
  */
 
 public class ContactForm {
 
+	/**
+	 * 氏名
+	 */
 	@NotBlank
 	@Size(min = 1, max = 30)
 	private String name;
-
-	//(message = "Invalid E-mail Format")
 	
+	/**
+	 * メールアドレス
+	 */
 	@NotBlank
 	@Email
 	private String email;
 
+	/**
+	 * お問い合わせカテゴリ
+	 */
 	@NotNull
 	private Integer contactCategory;
 
+	/**
+	 * お問い合わせ内容
+	 */
 	@NotBlank
 	private String contactForm;
 
