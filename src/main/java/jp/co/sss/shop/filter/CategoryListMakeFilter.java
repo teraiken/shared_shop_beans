@@ -93,7 +93,10 @@ public class CategoryListMakeFilter implements Filter {
 						|| requestURL.indexOf("/user/detail") != -1
 						|| requestURL.indexOf("/user/regist") != -1
 						|| requestURL.indexOf("/user/update") != -1
-						|| requestURL.indexOf("/user/delete") != -1)) {
+						|| requestURL.indexOf("/user/delete") != -1
+						|| requestURL.indexOf("/contact/customer/contact_customer_input") != -1
+						|| requestURL.indexOf("/contact/customer/contact_customer_check") != -1
+						|| requestURL.indexOf("/contact/customer/contact_customer_complete") != -1)) {
 
 			// URLのリクエスト先がフィルタ実行対象である場合
 			return true;

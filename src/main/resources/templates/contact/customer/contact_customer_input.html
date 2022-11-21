@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
+        th:replace="~{common/layout_5block :: layout(~{::title},~{::body/content()})}">
 <head>
 <title>お問い合わせ | シェアードショップ</title>
 <meta charset="UTF-8" />
 </head>
-<body class="contact_customer_input">
+<body class="admin user_detail">
 
 
 	<div class="search_area">
@@ -15,7 +15,7 @@
 		
 			<form action="#" method="post"
 				th:action="@{/contact/customer/contact_customer_check}"
-				th:object="${contactForm}">
+				th:object="${contactForm}" class="user_info_form">
 				<ul th:if="${#fields.hasErrors('*')}"  th:class="input_list" >
   					<li th:each="err : ${#fields.errors('*')}" th:text="${err}" th:class="error_list" ></li>
 				</ul>

@@ -1,5 +1,6 @@
 package jp.co.sss.shop.controller.contacts;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -20,6 +21,9 @@ public class ContactCustomerController {
 	@Autowired
 	ContactRepository contactRepository;
 	
+	@Autowired
+	HttpSession session;
+	
 	
 	/**
 	 * お問い合わせ画面の表示処理
@@ -30,7 +34,6 @@ public class ContactCustomerController {
 	@RequestMapping(path ="/contact/customer/contact_customer_input" , method = RequestMethod.GET)
 	public String contactForm(Model model) {
 		model.addAttribute("contactForm", new ContactForm());
-		model.addAttribute("page",2);
 		return "/contact/customer/contact_customer_input";
 	}
 	
@@ -44,7 +47,6 @@ public class ContactCustomerController {
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_input", method = RequestMethod.POST)
 	public String formContact(Model model,ContactForm contactForm) {
-		model.addAttribute("page",2);
 		return "/contact/customer/contact_customer_input";
 	}
 	
@@ -60,7 +62,6 @@ public class ContactCustomerController {
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_check", method = RequestMethod.POST)
 	public String contactCheck(@Valid @ModelAttribute ContactForm contactForm, BindingResult result,Model model) {
-		model.addAttribute("page",2);
 		
 		// 入力値にエラーがあった場合、お問い合わせ内容 入力画面表示処理に戻る
 		if (result.hasErrors()) {
@@ -79,7 +80,6 @@ public class ContactCustomerController {
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_complete", method = RequestMethod.POST)
 	public String contactComplete(@ModelAttribute ContactForm contactForm,Model model) {
-		model.addAttribute("page",2);
 
 		// お問い合わせの生成
 		Contacts contact = new Contacts();
