@@ -19,7 +19,8 @@ import jp.co.sss.shop.util.Constant;
 /**
  * 商品管理 一覧表示機能(一般会員用)のコントローラクラス
  *
- * @author 
+ * @author 安倍　商品一覧、売れ筋順表示、画面詳細
+ * @author 鷹松　新着順表示、カテゴリ別検索
  */
 @Controller
 public class ItemShowCustomerController {
@@ -51,9 +52,9 @@ public class ItemShowCustomerController {
 
 	/**
 	 * 新着順、売れ筋順表示
-	 * 
+	 *
 	 * @param sortType ソートタイプ番号
-	 * @param model
+	 * @param model Viewとの値受渡し
 	 * @param categoryId カテゴリID
 	 * @return "item/list/item_list"商品一覧表示画面
 	 */
@@ -77,16 +78,16 @@ public class ItemShowCustomerController {
 		model.addAttribute("items", itemBeanList);
 		// sortTypeをViewへ渡す
 		model.addAttribute("sortType", sortType);
-		
+
 		return "item/list/item_list";
 	}
 
 	/**
 	 * カテゴリ別検索
-	 * 
+	 *
 	 * @param sortType	ソートタイプ番号
 	 * @param categoryId カテゴリID
-	 * @param model
+	 * @param model Viewとの値受渡し
 	 * @return "item/list/item_list"商品一覧画面
 	 */
 	@RequestMapping("/item/list/category/{sortType}")
@@ -107,16 +108,16 @@ public class ItemShowCustomerController {
 		model.addAttribute("items", itemBeanList);
 		// sortTypeをViewへ渡す
 		model.addAttribute("sortType", sortType);
-		
+
 		return "item/list/item_list";
 
 	}
 
 	/**
 	 * 商品詳細画面
-	 * 
+	 *
 	 * @param id 選択された商品ID
-	 * @param model
+	 * @param model Viewとの値受渡し
 	 * @return "item/detail/item_detail"商品詳細画面
 	 */
 	@RequestMapping(path = "/item/detail/{id}")
@@ -134,13 +135,13 @@ public class ItemShowCustomerController {
 		}
 		// エンティティ内の検索結果をJavaBeansにコピー
 		List<ItemBean> itemBeanList = BeanCopy.copyEntityToItemBean(itemList);
-		
-		
+
+
 		// 商品情報をViewへ渡す
 		model.addAttribute("item", item);
 		model.addAttribute("items", itemBeanList);
-		
-		
+
+
 		return "item/detail/item_detail";
 	}
 

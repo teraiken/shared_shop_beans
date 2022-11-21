@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jp.co.sss.shop.entity.Contacts;
 import jp.co.sss.shop.repository.ContactRepository;
 
+/**
+ *
+ *
+ *
+ *
+ */
 @Controller
 public class ContactAdminController {
 
@@ -18,7 +24,7 @@ public class ContactAdminController {
 
 	/**
 	 * 問い合わせ一覧表示
-	 * 
+	 *
 	 * @param model
 	 * @return "contact/admin/contact_admin_list"一覧表示画面
 	 */
@@ -35,7 +41,7 @@ public class ContactAdminController {
 
 	/**
 	 * カテゴリ別検索
-	 * 
+	 *
 	 * @param contactCategory カテゴリID
 	 * @param model
 	 * @return "contact/admin/contact_admin_list"一覧表示画面
@@ -50,10 +56,10 @@ public class ContactAdminController {
 		model.addAttribute("page",1);
 		return "contact/admin/contact_admin_list";
 	}
-	
+
 	/**
 	 * ステータス別検索
-	 * 
+	 *
 	 * @param status ステータスID
 	 * @param model
 	 * @return "contact/admin/contact_admin_list"一覧表示画面
@@ -66,7 +72,7 @@ public class ContactAdminController {
 		model.addAttribute("contacts", contactList);
 		//ステータス別検索を表示させるための値をViewに渡す
 		model.addAttribute("page", 1);
-		
+
 		return "contact/admin/contact_admin_list";
 	}
 }

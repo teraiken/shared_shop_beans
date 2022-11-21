@@ -10,36 +10,77 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+/**
+ * @author 安倍
+ * @author 及川
+ * @author 岡部
+ *
+ */
 @Entity
 @Table(name = "contacts")
 public class Contacts {
+	/**
+	 *　商品ID
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_contact_gen")
 	@SequenceGenerator(name = "seq_contact_gen", sequenceName = "seq_contacts", allocationSize = 1)
 	private Integer id;
 
+	/**
+	 * 商品名
+	 */
 	@Column
 	private String name;
 
+	/**
+	 * メールアドレス
+	 */
 	@Column
 	private String email;
 
-	@Column 
+	/**
+	 * カテゴリ
+	 */
+	@Column
 	private Integer contactCategory;
 
+	/**
+	 * 問い合わせ内容
+	 */
 	@Column
 	private String contactForm;
 
+	/**
+	 * ステータス
+	 */
 	@Column (insertable = false)
 	private Integer status;
 
+	/**
+	 * 登録日
+	 */
 	@Column (insertable = false)
 	private Date insertDate;
 
+	/**
+	 * コンストラクタ
+	 */
 	public Contacts() {
 
 	}
 
+	/**
+	 * コンストラクタ
+	 *
+	 * @param id　商品ID
+	 * @param name　商品名
+	 * @param email　メールアドレス
+	 * @param contactCategory　カテゴリ
+	 * @param contactForm　問い合わせ内容
+	 * @param status　ステータス
+	 * @param insertDate　登録日
+	 */
 	public Contacts(Integer id, String name, String email, Integer contactCategory, String contactForm, Integer status,
 			Date insertDate) {
 		this.id = id;

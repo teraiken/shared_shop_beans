@@ -17,7 +17,7 @@ import javax.persistence.Table;
 /**
  * 商品情報のエンティティクラス
  *
- * @author author_name
+ * @author SystemShared
  */
 @Entity
 @Table(name = "items")
@@ -94,7 +94,7 @@ public class Item {
 
 	/**
 	 * コンストラクタ
-	 * 
+	 *
 	 * @param id  商品ID
 	 * @param name  商品名
 	 * @param description  商品説明
@@ -112,7 +112,7 @@ public class Item {
 
 	/**
 	 * コンストラクタ
-	 * 
+	 *
 	 * @param id  商品ID
 	 * @param name  商品名
 	 * @param price  価格
@@ -129,7 +129,7 @@ public class Item {
 		this.category = new Category();
 		this.category.setName(category_name);
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -209,5 +209,5 @@ public class Item {
 	public void setOrderItemsList(List<OrderItem> orderItemList) {
 		this.orderItemList = orderItemList;
 	}
-	
+
 }

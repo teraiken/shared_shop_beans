@@ -17,7 +17,7 @@ import jp.co.sss.shop.util.URLCheck;
 
 /**
  * ログインチェック用フィルタ
- * 
+ *
  * @author System Shared
  */
 @Component
@@ -51,7 +51,7 @@ public class LoginCheckFilter implements Filter {
 
 	/**
 	 * リクエストURLがチェック対象であるかを判定
-	 * 
+	 *
 	 * @param requestURL リクエストURL
 	 * @return true：チェック対象、false：チェック対象外
 	 */
@@ -67,6 +67,7 @@ public class LoginCheckFilter implements Filter {
 				&& !requestURL.endsWith("/user/regist/input")
 				&& !requestURL.endsWith("/user/regist/check")
 				&& !requestURL.endsWith("/user/regist/complete")
+				/* 問い合わせ機能＜追加機能＞ */
 				&& !requestURL.endsWith("/contact/customer/contact_customer_input")
 				&& !requestURL.endsWith("/contact/customer/contact_customer_check")
 				&& !requestURL.endsWith("/contact/customer/contact_customer_complete")){
