@@ -6,12 +6,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * お問い合わせ内容入力フォーム
+ * お問い合わせ内容入力クラス
+ * 
+ * お問い合わせ一覧、お問い合わせ詳細表示クラス
  *
- * @author 及川
+ * @author 及川 お問い合わせ内容入力フォーム
+ * @author 岡部 お問い合わせ一覧、お問い合わせ詳細表示フォーム
  */
 
 public class ContactForm {
+	
+	
+	/**
+	 * 問い合わせID
+	 */
+	private Integer id;
 
 	/**
 	 * 氏名
@@ -38,6 +47,21 @@ public class ContactForm {
 	 */
 	@NotBlank
 	private String contactForm;
+	
+	/**
+	 * 問い合わせステータス
+	 */
+	private Integer status;
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 
 	public String getName() {
 		return name;
@@ -69,5 +93,14 @@ public class ContactForm {
 
 	public void setContactForm(String contactForm) {
 		this.contactForm = contactForm;
+	}
+
+
+	public Integer getStatus() {
+		return status;
+	}
+	
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 }

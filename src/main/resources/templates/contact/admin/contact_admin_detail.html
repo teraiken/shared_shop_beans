@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{common/layout_4block :: layout(~{::title},~{::body/content()})}">
+<head>
+<title>問い合わせ詳細 | シェアードショップ</title>
+<meta charset="UTF-8" />
+</head>
+<body class="contact_admin_detail">
+	<h2 class="title">問い合わせ詳細</h2>
+	<div class="user_detail_area" th:object="${contactForm}">
+		<div id="status_id" th:value="${contactForm.id}"></div>
+		<ul class="input_list">
+
+			
+			<li><span class="input_title">氏名</span> 
+			<span class="input_value" th:text="${contactForm.name}" ></span></li>
+
+
+			<li><span class="input_title">メールアドレス</span> 
+			<span class="input_value" th:text="${contactForm.email}"></span></li>
+
+			<li><span class="input_title">カテゴリ</span> 
+			<span class="input_value" th:switch="${contactForm.contactCategory}"> 
+				<span th:case="0">サイトについて</span>
+				 <span th:case="1">商品について</span>
+				 <span	th:case="2">その他</span>
+			</span></li>
+			<li><span class="input_title">ステータス</span>
+				<div  th:object="${contactForm}">
+		<!--  -->	 <form method="post" th:action="@{/contact/admin/contact_admin_detail/{id}(id=${contactForm.id})}" th:object="${contactForm}" >  	
+			
+					<select id= "contactId" th:field="*{status}">
+						<option value="0" >未対応</option>
+			        	<option value="1" >対応中</option>
+			       		<option value="2" >対応済み</option>
+					</select> 
+					
+					<button>更新</button> 
+					
+			<!-- -->
+			</form>  	
+			
+			
+				</div>
+				</li>
+		</ul>
+		
+		<ul class="input_list">
+			<li><span class="input_title">問い合わせ内容</span> 
+			<span class="input_value" th:text="${contactForm.contactForm}"></span></li>
+		</ul>
+		
+		<form th:action="@{/contact/admin/contact_admin_list}">
+			<input class="list" type="submit" value="戻る" />
+			
+		</form>
+	</div>
+</body>
+</html>
