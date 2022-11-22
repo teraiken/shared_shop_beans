@@ -23,7 +23,7 @@ public class OrderForm {
 	 */
 	@NotBlank
 	@Size(min = 7, max = 7, message = "郵便番号は7文字で入力してください。")
-	@Pattern(regexp = "^[0-9]+$")
+	@Pattern(regexp = "^[0-9]+$", message = "{userRegist.numberpattern.message}")
 	private String postalCode;
 
 	/**
@@ -45,7 +45,7 @@ public class OrderForm {
 	 */
 	@NotBlank
 	@Size(min = 10, max = 11)
-	@Pattern(regexp = "^[0-9]+$")
+	@Pattern(regexp = "^[0-9]+$", message = "{userRegist.numberpattern.message}")
 	private String phoneNumber;
 
 	/**
