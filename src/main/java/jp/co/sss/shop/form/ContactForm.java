@@ -46,6 +46,7 @@ public class ContactForm {
 	 * お問い合わせ内容
 	 */
 	@NotBlank
+	@Size(min = 1, max = 400)
 	private String contactForm;
 	
 	/**
