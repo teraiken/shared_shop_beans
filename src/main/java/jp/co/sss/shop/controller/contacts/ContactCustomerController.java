@@ -34,7 +34,7 @@ public class ContactCustomerController {
 	@RequestMapping(path ="/contact/customer/contact_customer_input" , method = RequestMethod.GET)
 	public String contactForm(Model model) {
 		model.addAttribute("contactForm", new ContactForm());
-		return "/contact/customer/contact_customer_input";
+		return "contact/customer/contact_customer_input";
 	}
 	
 	
@@ -47,7 +47,7 @@ public class ContactCustomerController {
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_input", method = RequestMethod.POST)
 	public String formContact(Model model,ContactForm contactForm) {
-		return "/contact/customer/contact_customer_input";
+		return "contact/customer/contact_customer_input";
 	}
 	
 	
@@ -101,6 +101,6 @@ public class ContactCustomerController {
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_complete", method = RequestMethod.GET)
 	public String contactCompleteRedirect() {
-		return "/contact/customer/contact_customer_complete";
+		return "contact/customer/contact_customer_complete";
 	}
 }
