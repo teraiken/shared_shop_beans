@@ -25,8 +25,8 @@
 					th:text="${contact.name}"></a></td>
 				<td th:text="${#dates.format(contact.insertDate,'yyyy-MM-dd')}"></td>
 				<td th:switch="${contact.contactCategory}">
-					<span th:case="0">商品について</span>
-					<span th:case="1">サイトについて</span>
+					<span th:case="0">サイトについて</span>
+					<span th:case="1">商品について</span>
 					<span th:case="2">その他</span>
 				</td>
 				<td th:switch="${contact.status}">
