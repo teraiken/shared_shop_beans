@@ -17,7 +17,7 @@ import jp.co.sss.shop.form.UserForm;
 import jp.co.sss.shop.repository.UserRepository;
 
 /**
- * 会員管理 当濾器機能（非会員）のコントローラー
+ * 会員管理 登録機能（非会員）のコントローラー
  * 
  * @author Mari Ando
  *
