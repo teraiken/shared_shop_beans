@@ -8,6 +8,9 @@ import jp.co.sss.shop.entity.Contacts;
 
 
 /**
+ * 
+ * contactsテーブル用リポジトリ
+ * 
  * @author 安倍　全件検索、カテゴリ別検索
  * @author 及川　ステータス別検索
  *

@@ -11,6 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
+ * 
+ * お問い合わせ情報エンティティクラス
+ * 
  * @author 安倍
  * @author 及川
  * @author 岡部
