@@ -18,11 +18,9 @@ import jp.co.sss.shop.repository.ContactRepository;
 
 
 /**
- * お問い合わせ（運用側）コントローラークラス
+ * お問い合わせ（一般側）コントローラークラス
  * 
- * @author 安倍 問い合わせ一覧、問い合わせカテゴリ別
- * @author 及川 ステータス別検索
- * @author 岡部 詳細画面、ステータス更新
+ * @author 及川 
  *
  */
 @Controller
