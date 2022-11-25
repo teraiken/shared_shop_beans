@@ -109,7 +109,7 @@ public class BasketCustomerController {
 	}
 	
 	/**
-	 * 買い物かご情報商品一覧表示処理
+	 * 買い物かご情報商品一覧表示
 	 * 
 	 * @return "basket/shopping_basket" 買い物かご画面へ
 	 */
