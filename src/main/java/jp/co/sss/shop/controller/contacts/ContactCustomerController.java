@@ -16,6 +16,15 @@ import jp.co.sss.shop.entity.Contacts;
 import jp.co.sss.shop.form.ContactForm;
 import jp.co.sss.shop.repository.ContactRepository;
 
+
+/**
+ * お問い合わせ（運用側）コントローラークラス
+ * 
+ * @author 安倍 問い合わせ一覧、問い合わせカテゴリ別
+ * @author 及川 ステータス別検索
+ * @author 岡部 詳細画面、ステータス更新
+ *
+ */
 @Controller
 public class ContactCustomerController {
 	@Autowired
@@ -29,7 +38,7 @@ public class ContactCustomerController {
 	 * お問い合わせ画面の表示処理
 	 * 
 	 * @param model
-	 * @return "/contact/customer/contact_customer_input"お問い合わせ画面へ
+	 * @return "contact/customer/contact_customer_input"お問い合わせ画面へ
 	 */
 	@RequestMapping(path ="/contact/customer/contact_customer_input" , method = RequestMethod.GET)
 	public String contactForm(Model model) {
@@ -97,7 +106,7 @@ public class ContactCustomerController {
 	/**
 	 * お問い合わせ内容登録完了画面表示
 	 *
-	 * @return "/contact/customer/contact_customer_complete" お問い合わせ内容登録完了画面へ
+	 * @return "contact/customer/contact_customer_complete" お問い合わせ内容登録完了画面へ
 	 */
 	@RequestMapping(path = "/contact/customer/contact_customer_complete", method = RequestMethod.GET)
 	public String contactCompleteRedirect() {
